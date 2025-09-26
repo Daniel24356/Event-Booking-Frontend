@@ -1,5 +1,6 @@
 import React from "react";
 import img from "../assets/mfs.jpg"
+import profile from "../assets/default-profile.png"
 
 const ProfileDashboard: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const ProfileDashboard: React.FC = () => {
       <div className="relative bg-gradient-to-r from-red-400 via-red-500 to-red-600 h-56 rounded-b-2xl">
         <div className="absolute -bottom-16 left-10 flex items-center">
           <img
-            src="https://via.placeholder.com/150"
+            src={profile}
             alt="Profile"
             className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
           />

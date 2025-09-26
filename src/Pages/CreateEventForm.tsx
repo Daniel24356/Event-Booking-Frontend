@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Header from "../Components/Header";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { format } from "date-fns";
+import { IoIosArrowRoundBack } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 export interface CreateEventDTO {
     title: string;
@@ -13,6 +14,7 @@ export interface CreateEventDTO {
 }
 
 const CreateEventForm: React.FC = () => {
+    const navigate =  useNavigate()
     const [formData, setFormData] = useState<CreateEventDTO>({
         title: "",
         description: "",
@@ -40,6 +42,15 @@ const CreateEventForm: React.FC = () => {
             {/* <Header/> */}
             <section className="py-12 bg-gray-50">
                 <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+                    <button
+                        onClick={() => {
+                            navigate('/')
+                        }}
+                        className="flex items-center gap-2 text-[#333] hover:text-[#fc4931] mb-6"
+                    >
+                        <IoIosArrowRoundBack />
+                        <span className="font-medium">Back</span>
+                    </button>
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
                         Create New Event
                     </h2>
@@ -106,24 +117,7 @@ const CreateEventForm: React.FC = () => {
                         </div>
 
                         {/* Date */}
-                        {/* <div>
-            <label
-              htmlFor="date"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Event Date
-            </label>
-            <input
-              type="date"
-              id="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-red-500 focus:outline-none"
-              required
-            />
-          </div> */}
-                        <div className="w-[350px] max-sm:w-full flex flex-col items-start gap-2.5">
+                        <div className="w-full max-sm:w-full flex flex-col items-start gap-2.5">
                             <label className="self-stretch text-sm text-[#677069]">
                                 Event date <span className="text-[#fc4931]">*</span>
                             </label>

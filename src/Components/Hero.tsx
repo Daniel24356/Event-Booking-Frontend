@@ -58,7 +58,7 @@ const Hero = () => {
                     ].map((tag) => (
                         <span
                             key={tag}
-                            className="bg-white text-gray-800 px-3 py-1 rounded-full shadow-sm mb-2 cursor-pointer hover:bg-red-500 hover:text-white"
+                            className="bg-transparent border border-solid border-white text-gray-300 px-3 py-1 rounded-full shadow-sm mb-2 cursor-pointer hover:bg-red-500 hover:text-white"
                         >
                             {tag}
                         </span>

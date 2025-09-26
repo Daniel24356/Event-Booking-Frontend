@@ -78,7 +78,7 @@ const events = [
 
 const EventCarousel: React.FC = () => {
   return (
-    <section className="py-16 bg-gray-50">
+    <section id="event" className="py-16 bg-gray-50">
       <div className="text-center mb-10">
         <p className="text-red-500 text-sm uppercase font-semibold">
           Our Latest Listing
