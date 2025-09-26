@@ -24,7 +24,7 @@ const Header = () => {
 
             {/* Right Section */}
             <div className="flex items-center space-x-4">
-                <button className="p-2 rounded-full bg-white text-gray-700 hover:bg-red-500 hover:text-white">
+                <button onClick={() => navigate('profile')} className="p-2 rounded-full bg-white text-gray-700 hover:bg-red-500 hover:text-white">
                     <User size={18} />
                 </button>
                 <button onClick={() => navigate('create-event')} className="flex items-center bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-full text-sm font-medium">
