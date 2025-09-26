@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from "../Components/Header";
 
 export interface CreateEventDTO {
   title: string;
@@ -28,7 +29,9 @@ const CreateEventForm: React.FC = () => {
   };
 
   return (
-    <section className="py-12 bg-gray-50">
+    <>
+    <Header/>
+     <section className="py-12 bg-gray-50">
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-8">
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">
           Create New Event
@@ -124,6 +127,8 @@ const CreateEventForm: React.FC = () => {
         </form>
       </div>
     </section>
+    </>
+   
   );
 };
 
