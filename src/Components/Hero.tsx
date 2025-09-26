@@ -30,7 +30,7 @@ const Hero = () => {
                         placeholder="What are you looking for"
                         className="flex-1 px-4 py-3 text-gray-700 outline-none"
                     />
-                    <select className="px-4 py-3 border-t md:border-t-0 md:border-l outline-none text-gray-600">
+                    <select className="px-4 py-3 mr-3 border-t md:border-t-0 md:border-l outline-none text-gray-600">
                         <option>Select Location</option>
                         <option>Lagos</option>
                         <option>Abuja</option>
@@ -41,7 +41,7 @@ const Hero = () => {
                         <option>Shopping</option>
                         <option>Hotel</option>
                     </select>
-                    <button className="bg-red-500 hover:bg-red-600 text-white px-6 py-3 flex items-center">
+                    <button className="bg-red-500 hover:bg-red-600 rounded-full text-white px-6 py-3 ml-3 flex items-center">
                         <Search size={18} className="mr-2" /> Search
                     </button>
                 </div>
