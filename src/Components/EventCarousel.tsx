@@ -1,82 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import EventCard from "./EventCard";
-import img from "../assets/mfs.jpg"
+import axios from "axios";
 
-const events = [
-  {
-    image: img,
-    category: "Cardiology",
-    title: "Dr. Frances Sutton",
-    description: "MBBS, DM (Cardiology). Sunday - Friday: 9am - 5pm",
-    location: "New Jersey, USA",
-    price: "$50",
-    author: "Alina Fraser",
-    tag: "Appointment",
-  },
-  {
-    image: img,
-    category: "Italian",
-    title: "The Shapes of Pasta Food",
-    description: "Delicious authentic Italian pasta made fresh daily.",
-    location: "The Square Plaza, NJ, USA",
-    price: "$250",
-    author: "Eva Martin",
-    tag: "Open Now",
-  },
-  {
-    image: img,
-    category: "Music",
-    title: "Maya Kandon Music Concert",
-    description: "An amazing night of live music and entertainment.",
-    location: "The Square Plaza, NJ, USA",
-    price: "$50",
-    author: "Kian Bailey",
-  },
-  {
-    image: img,
-    category: "Mexican",
-    title: "Mexican Food in Chicago",
-    description: "Authentic Mexican flavors brought to your city.",
-    location: "Pulaski St, Chicago, IL, USA",
-    price: "$220",
-    author: "Alina Fraser",
-    tag: "Open Now",
-  },
-   {
-    image: img,
-    category: "Mexican",
-    title: "Mexican Food in Chicago",
-    description: "Authentic Mexican flavors brought to your city.",
-    location: "Pulaski St, Chicago, IL, USA",
-    price: "$220",
-    author: "Alina Fraser",
-    tag: "Open Now",
-  },
-   {
-    image: img,
-    category: "Mexican",
-    title: "Mexican Food in Chicago",
-    description: "Authentic Mexican flavors brought to your city.",
-    location: "Pulaski St, Chicago, IL, USA",
-    price: "$220",
-    author: "Alina Fraser",
-    tag: "Open Now",
-  },
-   {
-    image: img,
-    category: "Mexican",
-    title: "Mexican Food in Chicago",
-    description: "Authentic Mexican flavors brought to your city.",
-    location: "Pulaski St, Chicago, IL, USA",
-    price: "$220",
-    author: "Alina Fraser",
-    tag: "Open Now",
-  },
-];
+interface Event {
+  id: string;
+  title: string;
+  description: string;
+  location: string;
+  date: string;
+}
+
 
 const EventCarousel: React.FC = () => {
+
+   const [events, setEvents] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get<Event[]>("http://localhost:3001/v1/event");
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
+
   return (
     <section id="event" className="py-16 bg-gray-50">
       <div className="text-center mb-10">
