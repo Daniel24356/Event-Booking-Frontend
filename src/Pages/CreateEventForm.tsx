@@ -5,6 +5,8 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { format } from "date-fns";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"
+import Swal from "sweetalert2"
 
 export interface CreateEventDTO {
     title: string;
@@ -30,13 +32,51 @@ const CreateEventForm: React.FC = () => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = () => {
-        const payload: CreateEventDTO = {
-            ...formData,
-            date: eventDate ? format(eventDate, "yyyy-MM-dd") : "",
-        };
-        console.log(payload);
-    };
+   const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault(); // prevent page reload
+
+  // prepare payload
+  const payload: CreateEventDTO = {
+    ...formData,
+    date: eventDate ? format(eventDate, "yyyy-MM-dd") : "",
+  };
+
+  try {
+    // call your backend
+    const response = await axios.post("http://localhost:3001/v1/event", payload, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log("Event created successfully:", response.data);
+
+   Swal.fire({
+      icon: "success",
+      title: "Event Created!",
+      text: "Your event has been created successfully.",
+      confirmButtonColor: "#fc4931",
+    });
+
+    setFormData({
+      title: "",
+      description: "",
+      location: "",
+      date: "",
+    });
+    setEventDate(null);
+
+  } catch (error: any) {
+    console.error("Error creating event:", error.response?.data || error.message);
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: error.response?.data?.message || "Failed to create event. Please try again.",
+      confirmButtonColor: "#fc4931",
+    });
+  }
+};
+
     return (
         <>
             {/* <Header/> */}
