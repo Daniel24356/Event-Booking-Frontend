@@ -1,5 +1,5 @@
 import React from "react";
-
+import img from "../assets/mfs.jpg"
 
 const ProfileDashboard: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const ProfileDashboard: React.FC = () => {
           />
           <div className="ml-6 text-white">
             <p className="text-sm opacity-90">Member Since 2025</p>
-            <h1 className="text-2xl font-bold">Daniel Igwe</h1>
+            <h1 className="text-2xl font-bold text-black">Daniel Igwe</h1>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ const ProfileDashboard: React.FC = () => {
             <div className="relative bg-white rounded-xl shadow-md overflow-hidden">
               <div className="relative">
                 <img
-                  src="https://via.placeholder.com/400x200"
+                  src={img}
                   alt="Event"
                   className="w-full h-40 object-cover"
                 />
@@ -77,7 +77,7 @@ const ProfileDashboard: React.FC = () => {
             <div className="relative bg-white rounded-xl shadow-md overflow-hidden">
               <div className="relative">
                 <img
-                  src="https://via.placeholder.com/400x200"
+                  src={img}
                   alt="Event"
                   className="w-full h-40 object-cover"
                 />
