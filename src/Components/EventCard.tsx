@@ -18,51 +18,52 @@ const EventCard: React.FC<EventCardProps> = ({
   description,
   location,
 }) => {
-  const handleBooking = async () => {
-    try {
-      // Get token from localStorage (or context if you use one)
-      const token = localStorage.getItem("token");
-      if (!token) {
-        Swal.fire({
-          icon: "warning",
-          title: "Not Logged In",
-          text: "Please log in to book an event",
-          confirmButtonColor: "#fc4931",
-        });
-        return;
-      }
+ const handleBooking = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-      const payload = { eventId: id };
-
-      const response = await axios.post(
-        "http://localhost:3001/v1/booking",
-        payload,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Pass auth token
-          },
-        }
-      );
-
+    if (!token) {
       Swal.fire({
-        icon: "success",
-        title: "Booked!",
-        text: "Your event has been booked successfully 🎉",
+        icon: "warning",
+        title: "Not Logged In",
+        text: "Please log in to book an event",
         confirmButtonColor: "#fc4931",
       });
-
-      console.log("Booking successful:", response.data);
-    } catch (error: any) {
-      Swal.fire({
-        icon: "error",
-        title: "Booking Failed",
-        text: error.response?.data?.message || "Could not book this event",
-        confirmButtonColor: "#fc4931",
-      });
-      console.error("Booking error:", error);
+      return;
     }
-  };
+
+    const payload = { eventId: id };
+
+    const response = await axios.post(
+      "http://localhost:3001/v1/booking",
+      payload,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token.startsWith("Bearer ") ? token : `Bearer ${token}`,
+        },
+      }
+    );
+
+    Swal.fire({
+      icon: "success",
+      title: "Booked!",
+      text: "Your event has been booked successfully 🎉",
+      confirmButtonColor: "#fc4931",
+    });
+
+    console.log("Booking successful:", response.data);
+  } catch (error: any) {
+    Swal.fire({
+      icon: "error",
+      title: "Booking Failed",
+      text: error.response?.data?.message || "Could not book this event",
+      confirmButtonColor: "#fc4931",
+    });
+    console.error("Booking error:", error);
+  }
+};
+
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition mb-10">
