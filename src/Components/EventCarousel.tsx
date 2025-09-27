@@ -10,6 +10,7 @@ interface Event {
   description: string;
   location: string;
   date: string;
+  userName: string
 }
 
 
@@ -32,6 +33,10 @@ const EventCarousel: React.FC = () => {
 
     fetchEvents();
   }, []);
+
+  if(loading){
+    <p>Loading</p>
+  }
 
   return (
     <section id="event" className="py-16 bg-gray-50">
