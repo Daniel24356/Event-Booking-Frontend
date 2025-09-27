@@ -3,6 +3,7 @@ import { FaBookmark, FaShareAlt, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import img from "../assets/mfs.jpg";
+import { data } from "react-router-dom";
 
 interface EventCardProps {
   id: string; 
@@ -17,6 +18,7 @@ const EventCard: React.FC<EventCardProps> = ({
   title,
   description,
   location,
+  date
 }) => {
  const handleBooking = async () => {
   try {
@@ -66,7 +68,7 @@ const EventCard: React.FC<EventCardProps> = ({
 
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition mb-10">
+    <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition mb-10 h-[360px]">
       <div className="relative">
         <img src={img} alt={title} className="w-full h-48 object-cover" />
         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -84,7 +86,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <p className="text-sm text-gray-400 mt-2">{location}</p>
 
         <div className="flex justify-between items-center mt-4">
-          <p className="text-red-500 font-bold">55</p>
+          <p className="text-red-500 font-bold">{date}</p>
           <div className="flex gap-3 text-gray-400">
             <FaBookmark
               className="cursor-pointer hover:text-red-500"
