@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import img from "../assets/mfs.jpg";
 import profile from "../assets/default-profile.png";
+import { ApiUrl } from "../Config/api";
 
 interface User {
   id: string;
@@ -35,7 +36,7 @@ const ProfileDashboard: React.FC = () => {
       const fetchBookings = async () => {
         try {
           const res = await axios.get<{ data: any[] }>(
-            `http://localhost:3001/v1/booking`,
+            `${ApiUrl}/booking`,
             {
               headers: {
                 Authorization: `Bearer ${savedToken}`,

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ApiUrl } from "../Config/api";
 
 interface RegisterDto {
   email: string;
@@ -30,7 +31,7 @@ const SignUp: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3001/v1/auth/register", {
+      const response = await fetch(`${ApiUrl}/auth/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
