@@ -1,0 +1,1 @@
+export const ApiUrl = "https://event-booking-production-5558.up.railway.app";
