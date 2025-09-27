@@ -3,6 +3,7 @@ import { FaBookmark, FaShareAlt, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import img from "../assets/mfs.jpg";
+import { ApiUrl } from "../Config/api";
 
 interface EventCardProps {
   id: string; 
@@ -36,7 +37,7 @@ const EventCard: React.FC<EventCardProps> = ({
     const payload = { eventId: id };
 
     const response = await axios.post(
-      "http://localhost:3001/v1/booking",
+      `${ApiUrl}/booking`,
       payload,
       {
         headers: {
