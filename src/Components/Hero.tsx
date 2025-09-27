@@ -22,7 +22,7 @@ const Hero = () => {
                 </h1>
 
 
-                <div className="flex flex-col md:flex-row items-center bg-white rounded-full shadow-lg overflow-hidden max-w-4xl mx-auto mb-6">
+                <div className="hidden md:flex flex-col md:flex-row items-center bg-white rounded-full shadow-lg overflow-hidden max-w-4xl mx-auto mb-6">
                     <input
                         type="text"
                         placeholder="What are you looking for"
