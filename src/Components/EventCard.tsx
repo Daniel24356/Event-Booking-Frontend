@@ -3,7 +3,6 @@ import { FaBookmark, FaShareAlt, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import img from "../assets/mfs.jpg";
-import { data } from "react-router-dom";
 
 interface EventCardProps {
   id: string; 
