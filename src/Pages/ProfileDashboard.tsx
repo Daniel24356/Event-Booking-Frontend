@@ -3,6 +3,14 @@ import axios from "axios";
 import img from "../assets/mfs.jpg";
 import profile from "../assets/default-profile.png";
 
+interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+}
+
 interface BookedEvent {
   id: string;
   title: string;
@@ -13,22 +21,35 @@ interface BookedEvent {
 
 const ProfileDashboard: React.FC = () => {
   const [bookedEvents, setBookedEvents] = useState<BookedEvent[]>([]);
-  const userName = "Daniel Igwe"; 
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
-    const fetchBookings = async () => {
-      try {
-        const res = await axios.get<BookedEvent[]>(
-          `http://localhost:3000/v1/booking/${userName}`
-        );
-        setBookedEvents(res.data);
-      } catch (error) {
-        console.error("Error fetching booked events:", error);
-      }
-    };
+    const savedUser = localStorage.getItem("user");
+    const savedToken = localStorage.getItem("token");
 
-    fetchBookings();
-  }, [userName]);
+    if (savedUser && savedToken) {
+      const parsedUser: User = JSON.parse(savedUser);
+      setUser(parsedUser);
+
+      const fetchBookings = async () => {
+        try {
+          const res = await axios.get<{ data: BookedEvent[] }>(
+            `http://localhost:3001/v1/booking`, 
+            {
+              headers: {
+                Authorization: `Bearer ${savedToken}`,
+              },
+            }
+          );
+          setBookedEvents(res.data.data); // ✅ unwrap `data`
+        } catch (error) {
+          console.error("Error fetching booked events:", error);
+        }
+      };
+
+      fetchBookings();
+    }
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -42,7 +63,10 @@ const ProfileDashboard: React.FC = () => {
           />
           <div className="ml-6 text-white">
             <p className="text-sm opacity-90">Member Since 2025</p>
-            <h1 className="text-2xl font-bold text-black">{userName}</h1>
+            <h1 className="text-2xl font-bold text-black">
+              {user ? `${user.firstName} ${user.lastName}` : "Guest"}
+            </h1>
+            <p className="text-gray-800">{user?.email}</p>
           </div>
         </div>
       </div>

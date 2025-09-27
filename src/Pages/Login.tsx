@@ -40,7 +40,7 @@ const Login: React.FC = () => {
             const user = response.data?.data?.user;
 
             localStorage.setItem("token", token);
-            localStorage.setItem("userName", user);
+            localStorage.setItem("user", user);
 
             Swal.fire("Success", "Logged in successfully!", "success");
             navigate("/");
