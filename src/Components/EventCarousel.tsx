@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import EventCard from "./EventCard";
 import axios from "axios";
+import { ApiUrl } from "../Config/api";
 
 interface Event {
   id: string;
@@ -28,7 +29,7 @@ const EventCarousel: React.FC = () => {
     const fetchEvents = async () => {
       try {
         const response = await axios.get<ApiResponse<Event[]>>(
-          "http://localhost:3001/v1/event"
+          `${ApiUrl}/event`
         );
 
         const eventsArray = Array.isArray(response.data.data)
