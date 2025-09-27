@@ -7,9 +7,8 @@ const Header = () => {
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    // Simulated auth check (replace with your real logic)
     const isLoggedIn = !!localStorage.getItem("token");
-    const userName = localStorage.getItem("userName") || "Guest";
+    // const userName = localStorage.getItem("userName") || "Guest";
 
     const handleLogout = () => {
         localStorage.removeItem("token");
@@ -17,7 +16,6 @@ const Header = () => {
         navigate("/login");
     };
 
-    // Close dropdown when clicking outside
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {

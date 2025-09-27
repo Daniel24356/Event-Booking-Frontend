@@ -31,7 +31,6 @@ const EventCarousel: React.FC = () => {
           "http://localhost:3001/v1/event"
         );
 
-        // Extract array from response
         const eventsArray = Array.isArray(response.data.data)
           ? response.data.data
           : [];

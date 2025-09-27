@@ -5,7 +5,7 @@ import axios from "axios";
 import img from "../assets/mfs.jpg";
 
 interface EventCardProps {
-  id: string; // eventId
+  id: string; 
   title: string;
   description: string;
   location: string;
@@ -67,7 +67,6 @@ const EventCard: React.FC<EventCardProps> = ({
 
   return (
     <div className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition mb-10">
-      {/* Image */}
       <div className="relative">
         <img src={img} alt={title} className="w-full h-48 object-cover" />
         <span className="absolute top-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
@@ -78,7 +77,7 @@ const EventCard: React.FC<EventCardProps> = ({
         </span>
       </div>
 
-      {/* Content */}
+
       <div className="p-4">
         <h3 className="text-lg font-semibold">{title}</h3>
         <p className="text-gray-500 text-sm mt-1">{description}</p>

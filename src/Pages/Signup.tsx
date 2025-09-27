@@ -57,7 +57,6 @@ const SignUp: React.FC = () => {
           Create Account
         </h2>
 
-        {/* Inputs */}
         {["firstName", "lastName", "username", "email", "password"].map(
           (field) => (
             <div key={field} className="mb-4">

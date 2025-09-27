@@ -61,7 +61,6 @@ const Login: React.FC = () => {
                     Login
                 </h2>
 
-                {/* Email */}
                 <div className="mb-4">
                     <label className="block text-sm font-medium text-gray-600 mb-1">
                         Email
@@ -76,7 +75,6 @@ const Login: React.FC = () => {
                     />
                 </div>
 
-                {/* Password */}
                 <div className="mb-6">
                     <label className="block text-sm font-medium text-gray-600 mb-1">
                         Password

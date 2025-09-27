@@ -43,7 +43,6 @@ const ProfileDashboard: React.FC = () => {
             }
           );
 
-          // Extract just the event details from booking
           const events = res.data.data.map((booking) => booking.event);
           setBookedEvents(events);
         } catch (error) {
@@ -57,7 +56,7 @@ const ProfileDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header with gradient */}
+
       <div className="relative bg-gradient-to-r from-red-400 via-red-500 to-red-600 h-56 rounded-b-2xl">
         <div className="absolute -bottom-16 left-10 flex items-center">
           <img
@@ -75,7 +74,6 @@ const ProfileDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="mt-20 px-10 border-b border-gray-200">
         <ul className="flex gap-8 text-gray-600 font-medium">
           <li className="pb-3 border-b-2 border-red-500 text-red-500 cursor-pointer">
@@ -89,7 +87,7 @@ const ProfileDashboard: React.FC = () => {
       </div>
 
       <div className="px-10 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
-        {/* Highlights */}
+
         <div className="md:col-span-1 space-y-6">
           <div className="bg-white rounded-xl shadow-md p-4 border-l-4 border-purple-500">
             <p className="text-gray-600">Booked Events</p>
@@ -103,7 +101,6 @@ const ProfileDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Booked Events */}
         <div className="md:col-span-3">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">
             Booked Events ({bookedEvents.length})
@@ -137,7 +134,7 @@ const ProfileDashboard: React.FC = () => {
                     </h3>
                     <p className="text-sm text-gray-500">{event.description}</p>
                     <p className="text-xs text-gray-400 mt-2">
-                      📍 {event.location}
+                       {event.location}
                     </p>
                   </div>
                 </div>
