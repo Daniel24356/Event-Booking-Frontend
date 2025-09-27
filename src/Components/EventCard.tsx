@@ -1,5 +1,5 @@
 import React from "react";
-import { FaHeart, FaShareAlt, FaEye } from "react-icons/fa";
+import { FaBookmark, FaShareAlt, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import img from "../assets/mfs.jpg";
@@ -48,7 +48,7 @@ const EventCard: React.FC<EventCardProps> = ({
     Swal.fire({
       icon: "success",
       title: "Booked!",
-      text: "Your event has been booked successfully 🎉",
+      text: "Your event has been booked successfully",
       confirmButtonColor: "#fc4931",
     });
 
@@ -87,7 +87,7 @@ const EventCard: React.FC<EventCardProps> = ({
         <div className="flex justify-between items-center mt-4">
           <p className="text-red-500 font-bold">55</p>
           <div className="flex gap-3 text-gray-400">
-            <FaHeart
+            <FaBookmark
               className="cursor-pointer hover:text-red-500"
               onClick={handleBooking}
             />
