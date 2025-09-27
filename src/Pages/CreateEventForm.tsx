@@ -7,6 +7,7 @@ import { IoIosArrowRoundBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import axios from "axios"
 import Swal from "sweetalert2"
+import { ApiUrl } from "../Config/api";
 
 export interface CreateEventDTO {
     title: string;
@@ -42,7 +43,7 @@ const CreateEventForm: React.FC = () => {
 
   try {
 
-    const response = await axios.post("http://localhost:3001/v1/event", payload, {
+    const response = await axios.post(`${ApiUrl}/event`, payload, {
       headers: {
         "Content-Type": "application/json",
       },
