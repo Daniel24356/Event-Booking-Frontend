@@ -1,1 +1,1 @@
-export const ApiUrl = "https://event-booking-production-5558.up.railway.app";
+export const ApiUrl = "https://event-booking-production-5558.up.railway.app/v1";
