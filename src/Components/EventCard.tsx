@@ -10,7 +10,6 @@ interface EventCardProps {
   description: string;
   location: string;
   date: string;
-  userName: string; // current logged in user
 }
 
 const EventCard: React.FC<EventCardProps> = ({
@@ -18,18 +17,33 @@ const EventCard: React.FC<EventCardProps> = ({
   title,
   description,
   location,
-  userName,
 }) => {
   const handleBooking = async () => {
     try {
-      const payload = {
-        userName,
-        eventId: id,
-      };
+      // Get token from localStorage (or context if you use one)
+      const token = localStorage.getItem("token");
+      if (!token) {
+        Swal.fire({
+          icon: "warning",
+          title: "Not Logged In",
+          text: "Please log in to book an event",
+          confirmButtonColor: "#fc4931",
+        });
+        return;
+      }
 
-      const response = await axios.post("http://localhost:3001/v1/booking", payload, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const payload = { eventId: id };
+
+      const response = await axios.post(
+        "http://localhost:3001/v1/booking",
+        payload,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, // Pass auth token
+          },
+        }
+      );
 
       Swal.fire({
         icon: "success",
