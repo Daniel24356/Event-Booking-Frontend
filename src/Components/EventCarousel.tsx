@@ -10,21 +10,35 @@ interface Event {
   description: string;
   location: string;
   date: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
+interface ApiResponse<T> {
+  error: boolean;
+  message: string;
+  data: T;
+}
 
 const EventCarousel: React.FC = () => {
-
-   const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+  useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get<Event[]>("http://localhost:3001/v1/event");
-        setEvents(response.data);
+        const response = await axios.get<ApiResponse<Event[]>>(
+          "http://localhost:3001/v1/event"
+        );
+
+        const eventsArray = Array.isArray(response.data.data)
+          ? response.data.data
+          : [];
+
+        setEvents(eventsArray);
       } catch (error) {
         console.error("Error fetching events:", error);
+        setEvents([]);
       } finally {
         setLoading(false);
       }
@@ -32,6 +46,10 @@ const EventCarousel: React.FC = () => {
 
     fetchEvents();
   }, []);
+
+  if (loading) {
+    return <p className="text-center py-10">Loading...</p>;
+  }
 
   return (
     <section id="event" className="py-16 bg-gray-50">
@@ -56,11 +74,11 @@ const EventCarousel: React.FC = () => {
             0: { slidesPerView: 1 },
             768: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
-            1028: {slidesPerView: 4}
+            1280: { slidesPerView: 4 },
           }}
         >
-          {events.map((event, index) => (
-            <SwiperSlide key={index}>
+          {events.map((event) => (
+            <SwiperSlide key={event.id}>
               <EventCard {...event} />
             </SwiperSlide>
           ))}

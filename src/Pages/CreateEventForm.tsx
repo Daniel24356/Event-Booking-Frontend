@@ -33,16 +33,15 @@ const CreateEventForm: React.FC = () => {
     };
 
    const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault(); // prevent page reload
+  e.preventDefault(); 
 
-  // prepare payload
   const payload: CreateEventDTO = {
     ...formData,
     date: eventDate ? format(eventDate, "yyyy-MM-dd") : "",
   };
 
   try {
-    // call your backend
+
     const response = await axios.post("http://localhost:3001/v1/event", payload, {
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +78,6 @@ const CreateEventForm: React.FC = () => {
 
     return (
         <>
-            {/* <Header/> */}
             <section className="py-12 bg-gray-50">
                 <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-8">
                     <button
@@ -116,7 +114,6 @@ const CreateEventForm: React.FC = () => {
                             />
                         </div>
 
-                        {/* Description */}
                         <div>
                             <label
                                 htmlFor="description"
@@ -136,7 +133,6 @@ const CreateEventForm: React.FC = () => {
                             ></textarea>
                         </div>
 
-                        {/* Location */}
                         <div>
                             <label
                                 htmlFor="location"
@@ -156,7 +152,6 @@ const CreateEventForm: React.FC = () => {
                             />
                         </div>
 
-                        {/* Date */}
                         <div className="w-full max-sm:w-full flex flex-col items-start gap-2.5">
                             <label className="self-stretch text-sm text-[#677069]">
                                 Event date <span className="text-[#fc4931]">*</span>
@@ -194,7 +189,6 @@ const CreateEventForm: React.FC = () => {
 
                         </div>
 
-                        {/* Submit */}
                         <button
                             type="submit"
                             className="w-full py-3 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-600 transition"
