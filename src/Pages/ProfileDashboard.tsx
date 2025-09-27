@@ -9,9 +9,10 @@ interface User {
   lastName: string;
   username: string;
   email: string;
+  profilePhoto?: string;
 }
 
-interface BookedEvent {
+interface Event {
   id: string;
   title: string;
   description: string;
@@ -20,7 +21,7 @@ interface BookedEvent {
 }
 
 const ProfileDashboard: React.FC = () => {
-  const [bookedEvents, setBookedEvents] = useState<BookedEvent[]>([]);
+  const [bookedEvents, setBookedEvents] = useState<Event[]>([]);
   const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
@@ -33,15 +34,18 @@ const ProfileDashboard: React.FC = () => {
 
       const fetchBookings = async () => {
         try {
-          const res = await axios.get<{ data: BookedEvent[] }>(
-            `http://localhost:3001/v1/booking`, 
+          const res = await axios.get<{ data: any[] }>(
+            `http://localhost:3001/v1/booking`,
             {
               headers: {
                 Authorization: `Bearer ${savedToken}`,
               },
             }
           );
-          setBookedEvents(res.data.data); // ✅ unwrap `data`
+
+          // Extract just the event details from booking
+          const events = res.data.data.map((booking) => booking.event);
+          setBookedEvents(events);
         } catch (error) {
           console.error("Error fetching booked events:", error);
         }
@@ -57,11 +61,11 @@ const ProfileDashboard: React.FC = () => {
       <div className="relative bg-gradient-to-r from-red-400 via-red-500 to-red-600 h-56 rounded-b-2xl">
         <div className="absolute -bottom-16 left-10 flex items-center">
           <img
-            src={profile}
+            src={user?.profilePhoto || profile}
             alt="Profile"
             className="w-32 h-32 rounded-full border-4 border-white shadow-lg"
           />
-          <div className="ml-6 text-white">
+          <div className="ml-6 text-white mt-6">
             <p className="text-sm opacity-90">Member Since 2025</p>
             <h1 className="text-2xl font-bold text-black">
               {user ? `${user.firstName} ${user.lastName}` : "Guest"}
@@ -99,10 +103,10 @@ const ProfileDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Saved Events */}
+        {/* Booked Events */}
         <div className="md:col-span-3">
           <h2 className="text-lg font-semibold text-gray-700 mb-4">
-            Saved Events ({bookedEvents.length})
+            Booked Events ({bookedEvents.length})
           </h2>
 
           {bookedEvents.length === 0 ? (
