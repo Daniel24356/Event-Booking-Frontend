@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { ApiUrl } from "../Config/api";
 
 interface LoginDto {
     email: string;
@@ -23,7 +24,7 @@ const Login: React.FC = () => {
 
         try {
             const response = await axios.post(
-                "http://localhost:3001/v1/auth/login",
+                `${ApiUrl}/auth/login`,
                 {
                     email: formData.email,
                     password: formData.password,
